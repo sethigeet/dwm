@@ -239,6 +239,7 @@ static Atom getatomprop(Client *c, Atom prop);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
+static void goback(const Arg *arg);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
 static int handlexevent(struct epoll_event *ev);
@@ -364,7 +365,7 @@ static Cur *cursor[CurLast];
 static Clr **scheme;
 static Display *dpy;
 static Drw *drw;
-static Monitor *mons, *selmon, *lastselmon;
+static Monitor *mons, *selmon, *lastselmon, *prevmon;
 static Window root, wmcheckwin;
 static xcb_connection_t *xcon;
 
@@ -592,6 +593,7 @@ buttonpress(XEvent *e)
 	/* focus monitor if necessary */
 	if ((m = wintomon(ev->window)) && m != selmon) {
 		unfocus(selmon->sel, 1);
+		prevmon = selmon;
 		selmon = m;
 		focus(NULL);
 	}
@@ -953,6 +955,7 @@ enternotify(XEvent *e)
 	m = c ? c->mon : wintomon(ev->window);
 	if (m != selmon) {
 		unfocus(selmon->sel, 1);
+		prevmon = selmon;
 		selmon = m;
 	} else if (!c || c == selmon->sel)
 		return;
@@ -977,8 +980,10 @@ focus(Client *c)
 	if (selmon->sel && selmon->sel != c)
 		unfocus(selmon->sel, 0);
 	if (c) {
-		if (c->mon != selmon)
+		if (c->mon != selmon) {
+			prevmon = selmon;
 			selmon = c->mon;
+		}
 		if (c->isurgent)
 			seturgent(c, 0);
 		detachstack(c);
@@ -1014,6 +1019,7 @@ focusmon(const Arg *arg)
 	if ((m = dirtomon(arg->i)) == selmon)
 		return;
 	unfocus(selmon->sel, 0);
+	prevmon = selmon;
 	selmon = m;
 	focus(NULL);
 }
@@ -1100,6 +1106,21 @@ gettextprop(Window w, Atom atom, char *text, unsigned int size)
 	text[size - 1] = '\0';
 	XFree(name.value);
 	return 1;
+}
+
+void
+goback(const Arg *arg)
+{
+	if (prevmon == NULL) {
+		Arg a = {0};
+		view(&a);
+	} else if (prevmon != selmon) {
+		unfocus(selmon->sel, 0);
+		Monitor *p = selmon;
+		selmon = prevmon;
+		focus(NULL);
+		prevmon = p;
+	}
 }
 
 void
@@ -1370,6 +1391,8 @@ motionnotify(XEvent *e)
 		return;
 	if ((m = recttomon(ev->x_root, ev->y_root, 1, 1)) != mon && mon) {
 		unfocus(selmon->sel, 1);
+		if (m != selmon)
+			prevmon = selmon;
 		selmon = m;
 		focus(NULL);
 	}
@@ -1431,6 +1454,7 @@ movemouse(const Arg *arg)
 	XUngrabPointer(dpy, CurrentTime);
 	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
 		sendmon(c, m);
+		prevmon = selmon;
 		selmon = m;
 		focus(NULL);
 	}
@@ -1786,6 +1810,7 @@ resizemouse(const Arg *arg)
 	while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 	if ((m = recttomon(c->x, c->y, c->w, c->h)) != selmon) {
 		sendmon(c, m);
+		prevmon = selmon;
 		selmon = m;
 		focus(NULL);
 	}
@@ -2360,6 +2385,7 @@ toggleview(const Arg *arg)
 	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
 
 	if (newtagset) {
+		prevmon = NULL;
 		selmon->tagset[selmon->seltags] = newtagset;
 		focus(NULL);
 		arrange(selmon);
@@ -2763,6 +2789,7 @@ view(const Arg *arg)
 {
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
+	prevmon = NULL;
 	selmon->seltags ^= 1; /* toggle sel tagset */
 	if (arg->ui & TAGMASK)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
