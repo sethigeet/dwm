@@ -223,6 +223,7 @@ static void configure(Client *c);
 static void configurenotify(XEvent *e);
 static void configurerequest(XEvent *e);
 static Monitor *createmon(void);
+static void cyclelayout(const Arg *arg);
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
@@ -827,6 +828,18 @@ createmon(void)
 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
 	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
 	return m;
+}
+
+void
+cyclelayout(const Arg *arg) {
+	ptrdiff_t i;
+
+	i = selmon->lt[selmon->sellt] - layouts;
+	i += LENGTH(layouts);
+	i += arg->i;
+	i %= LENGTH(layouts);
+
+	setlayout(&(const Arg){.v = &layouts[i] });
 }
 
 void
