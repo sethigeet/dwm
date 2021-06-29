@@ -128,6 +128,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow, issticky;
+	int hasfloatbw;
 	pid_t pid;
 	char scratchkey;
 	Client *next;
@@ -189,6 +190,7 @@ typedef struct {
 	unsigned int tags;
 	int iscentered;
 	int isfloating;
+	int floatx, floaty, floatw, floath;
 	int isterminal;
 	int noswallow;
 	int monitor;
@@ -419,6 +421,12 @@ applyrules(Client *c)
 			c->noswallow  = r->noswallow;
 			c->iscentered = r->iscentered;
 			c->isfloating = r->isfloating;
+			if (r->isfloating) {
+				c->x = c->mon->mx + r->floatx;
+				c->y = r->floaty;
+				c->w = r->floatw;
+				c->h = r->floath;
+			}
 			c->tags |= r->tags;
 			c->scratchkey = r->scratchkey;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
