@@ -53,6 +53,7 @@ static const int decorhints  = 1;    /* 1 means respect decoration hints */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
+#include "selfrestart.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -200,6 +201,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY|ControlMask,           XK_r,      self_restart,   {0} },
 	{ MODKEY|ShiftMask,             XK_BackSpace, quit,        {0} },
 };
 
