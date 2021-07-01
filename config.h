@@ -52,20 +52,20 @@ static const int decorhints  = 1;    /* 1 means respect decoration hints */
 
 static const Layout layouts[] = {
 	/* symbol      layout function              Original icon */
-	{ "",            tile },                   /* []= */
-	{ "",             monocle },                /* [M] */
-	{ "",             spiral },                 /* [@] */
-	{ "ﭕ",             dwindle },                /* [\\] */
-	{ "ﲜ",             deck },                   /* H[] */
-	{ "",             bstack },                 /* TTT */
-	{ "",             bstackhoriz },            /* === */
-	{ "",             grid },                   /* HHH */
-	{ "###",           nrowgrid },               /* ### */
-	{ "---",           horizgrid },              /* --- */
-	{ ":::",           gaplessgrid },            /* ::: */
-	{ "",             centeredmaster },         /* |M| */
-	{ ">M>",           centeredfloatingmaster }, /* >M> */
-	{ "",             NULL },                   /* ><> */
+	{ "",            tile },
+	{ "",             monocle },
+	{ "",             spiral },
+	{ "ﭕ",             dwindle },
+	{ "ﲜ",             deck },
+	{ "",             bstack },
+	{ "",             bstackhoriz },
+	{ "",             grid },
+	{ "###",           nrowgrid },
+	{ "---",           horizgrid },
+	{ ":::",           gaplessgrid },
+	{ "",             centeredmaster },
+	{ ">M>",           centeredfloatingmaster },
+	{ "",             NULL },
 };
 
 /* key definitions */
@@ -91,9 +91,9 @@ static const Layout layouts[] = {
 /* commands */
 static char promptmon[2] = "0"; /* component of promptcmd, manipulated in spawn() */
 static const char *promptcmd[] = { "rofi", "-show", "drun", "-monitor", promptmon, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "/bin/sh", "-c", "$TERMINAL", NULL };
 /* First arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
+static const char *scratchpadcmd[] = {"s", "/bin/sh", "-c", "$TERMINAL", "--title", "scratchpad", NULL}; 
 
 /*
  * Xresources preferences to load at startup
