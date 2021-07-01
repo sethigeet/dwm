@@ -2125,7 +2125,9 @@ fullscreen(const Arg *arg)
 	} else {
 		setlayout(&((Arg) { .v = last_layout }));
 	}
-	togglebar(arg);
+
+	if (arg >= 0)
+		togglebar(arg);
 }
 
 void
