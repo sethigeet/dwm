@@ -2119,15 +2119,12 @@ Layout *last_layout;
 void
 fullscreen(const Arg *arg)
 {
-	if (selmon->showbar) {
+	if (selmon->lt[selmon->sellt] != &layouts[1]) {
 		for(last_layout = (Layout *)layouts; last_layout != selmon->lt[selmon->sellt]; last_layout++);
 		setlayout(&((Arg) { .v = &layouts[1] }));
 	} else {
 		setlayout(&((Arg) { .v = last_layout }));
 	}
-
-	if (arg >= 0)
-		togglebar(arg);
 }
 
 void
@@ -2424,11 +2421,11 @@ tagtoright(const Arg *arg) {
 void
 togglebar(const Arg *arg)
 {
-	/**
-     * Polybar tray does not raise maprequest event. It must be manually scanned
+	/*
+	 * Polybar tray does not raise maprequest event. It must be manually scanned
 	 * for. Scanning it too early while the tray is being populated would give
 	 * wrong dimensions.
-     */
+	*/
 	if (!selmon->traywin)
 		scantray();
 
