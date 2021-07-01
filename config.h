@@ -77,7 +77,7 @@ static const Layout layouts[] = {
 	{ "---",           horizgrid },
 	{ ":::",           gaplessgrid },
 	{ "",             centeredmaster },
-	{ ">M>",           centeredfloatingmaster },
+	{ "",           centeredfloatingmaster },
 	{ "",             NULL },
 };
 
