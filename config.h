@@ -82,7 +82,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -134,8 +134,6 @@ ResourcePref resources[] = {
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	/* TODO: Remove this */
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 
 	/* Scratchpads */
 	{ MODKEY|ShiftMask,             XK_t,      togglescratch,  {.v = terminalscratchpadcmd } },
