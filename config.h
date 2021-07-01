@@ -16,12 +16,12 @@ static       char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static       char *alttrayname      = "tray";    /* Polybar tray instance name */
 static       char *altbarcmd        = "$XDG_CONFIG_HOME/polybar/launch.sh"; /* Alternate bar launch command */
 static const char *fonts[]          = { "monospace:size=10" };
-static char normbgcolor[]           = "#222222";
-static char normbordercolor[]       = "#444444";
-static char normfgcolor[]           = "#bbbbbb";
-static char selfgcolor[]            = "#eeeeee";
-static char selbordercolor[]        = "#005577";
-static char selbgcolor[]            = "#005577";
+static char normbgcolor[]           = "#1F2335";
+static char normbordercolor[]       = "#545C7E";
+static char normfgcolor[]           = "#C0CAF5";
+static char selfgcolor[]            = "#C0CAF5";
+static char selbordercolor[]        = "#7AA2F7";
+static char selbgcolor[]            = "#7AA2F7";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
@@ -32,10 +32,6 @@ static char *colors[][3] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
 	/* class     instance  title           tags mask  iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
 	{ "Gimp",    NULL,     NULL,           0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   },
 	{ "Firefox", NULL,     NULL,           1 << 8,        0,           0,      -1,  -1,  -1,  -1,        0,          -1,        -1,        0   },
