@@ -90,7 +90,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char promptmon[2] = "0"; /* component of promptcmd, manipulated in spawn() */
-static const char *promptcmd[] = { "rofi", "-monitor", promptmon, NULL };
+static const char *promptcmd[] = { "rofi", "-show", "drun", "-monitor", promptmon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 /* First arg only serves to match against key in rules */
 static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
