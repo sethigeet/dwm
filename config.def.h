@@ -16,7 +16,6 @@ static       char *altbarclass      = "Polybar"; /* Alternate bar class name */
 static       char *alttrayname      = "tray";    /* Polybar tray instance name */
 static       char *altbarcmd        = "$XDG_CONFIG_HOME/polybar/launch.sh"; /* Alternate bar launch command */
 static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -94,8 +93,8 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static char promptmon[2] = "0"; /* component of promptcmd, manipulated in spawn() */
+static const char *promptcmd[] = { "rofi", "-m", promptmon, NULL };
 static const char *termcmd[]  = { "st", NULL };
 /* First arg only serves to match against key in rules */
 static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
