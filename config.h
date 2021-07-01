@@ -32,15 +32,25 @@ static char *colors[][3] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* class      instance  title                   tags mask  iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
-	{ "Gimp",     NULL,     NULL,                   0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   },
-	{ "Firefox",  NULL,     NULL,                   1 << 8,        0,           0,      -1,  -1,  -1,  -1,        0,          -1,        -1,        0   },
-	{ "St",       NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
-	{ NULL,       NULL,     "Event Tester",         0,             0,           0,      -1,  -1,  -1,  -1,        0,           1,        -1,        0   }, /* xev */
+	/* class      instance  title                    tags mask     iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
+
+	/* Make some windows floating */
+	{ "ssh-askpass",  NULL,     NULL,                   0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* ssh-askpass */
+	{ "kite",         NULL,     NULL,                   0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* Kite Co pilot */
+	{ NULL,           NULL,     "pinentry",             0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* GPG key password entry */
+	{ NULL,           NULL,     "win0",                 0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* Android Studio startup screen */
+	{ NULL,           NULL,     "^Android Emulator*",   0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* Android Emulator */
+	{ NULL,           NULL,     "^Participants*",       0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* Zoom meetings */
+
+	/* Swallow terminals */
+	{ "Alacritty",    NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
+	{ "kitty",        NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
+	{ "St",           NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
+	{ NULL,           NULL,     "Event Tester",         0,             0,           0,      -1,  -1,  -1,  -1,        0,           1,        -1,        0   }, /* xev */
 
 	/* Scratchpads */
-	{ NULL,       NULL,     "terminal scratchpad",  0,             0,           1,      90, 11, 1728, 360,        1,           0,        -1,        't' }, /* terminal scratchpad */
-	{ NULL,       NULL,     "Calculator",           0,             0,           1,     640, 360, 640, 360,        0,          -1,        -1,        'c' }, /* terminal scratchpad */
+	{ NULL,          NULL,      "terminal scratchpad",  0,             0,           1,      90, 11, 1728, 360,        1,           0,        -1,        't' }, /* terminal scratchpad */
+	{ NULL,          NULL,      "Calculator",           0,             0,           1,     640, 360, 640, 360,        0,          -1,        -1,        'c' }, /* calculator scratchpad */
 };
 
 /* layout(s) */
