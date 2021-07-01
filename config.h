@@ -32,12 +32,15 @@ static char *colors[][3] = {
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* class     instance  title           tags mask  iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
-	{ "Gimp",    NULL,     NULL,           0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   },
-	{ "Firefox", NULL,     NULL,           1 << 8,        0,           0,      -1,  -1,  -1,  -1,        0,          -1,        -1,        0   },
-	{ "St",      NULL,     NULL,           0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
-	{ NULL,      NULL,     "Event Tester", 0,             0,           0,      -1,  -1,  -1,  -1,        0,           1,        -1,        0   }, /* xev */
-	{ NULL,      NULL,     "scratchpad",   0,             0,           1,     300, 300, 700, 500,        1,           0,        -1,        's' }, /* terminal scratchpad */
+	/* class      instance  title                   tags mask  iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
+	{ "Gimp",     NULL,     NULL,                   0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   },
+	{ "Firefox",  NULL,     NULL,                   1 << 8,        0,           0,      -1,  -1,  -1,  -1,        0,          -1,        -1,        0   },
+	{ "St",       NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
+	{ NULL,       NULL,     "Event Tester",         0,             0,           0,      -1,  -1,  -1,  -1,        0,           1,        -1,        0   }, /* xev */
+
+	/* Scratchpads */
+	{ NULL,       NULL,     "terminal scratchpad",  0,             0,           1,      90, 11, 1728, 360,        1,           0,        -1,        't' }, /* terminal scratchpad */
+	{ NULL,       NULL,     "Calculator",           0,             0,           1,     640, 360, 640, 360,        0,          -1,        -1,        'c' }, /* terminal scratchpad */
 };
 
 /* layout(s) */
@@ -51,7 +54,7 @@ static const int decorhints  = 1;    /* 1 means respect decoration hints */
 #include "selfrestart.c"
 
 static const Layout layouts[] = {
-	/* symbol      layout function              Original icon */
+	/* symbol      layout function */
 	{ "",            tile },
 	{ "",             monocle },
 	{ "",             spiral },
@@ -92,7 +95,8 @@ static char promptmon[2] = "0"; /* component of promptcmd, manipulated in spawn(
 static const char *promptcmd[] = { "rofi", "-show", "drun", "-monitor", promptmon, NULL };
 static const char *termcmd[]  = { "/bin/sh", "-c", "$TERMINAL", NULL };
 /* First arg only serves to match against key in rules */
-static const char *scratchpadcmd[] = {"s", "/bin/sh", "-c", "$TERMINAL", "--title", "scratchpad", NULL}; 
+static const char *terminalscratchpadcmd[] = {"t", "/bin/sh", "-c", "$TERMINAL --title 'terminal scratchpad'", NULL}; 
+static const char *calculatorscratchpadcmd[] = {"c", "gnome-calculator", NULL}; 
 
 /*
  * Xresources preferences to load at startup
@@ -124,7 +128,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 
 	/* Scratchpads */
-	{ MODKEY,                       XK_t,      togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,             XK_t,      togglescratch,  {.v = terminalscratchpadcmd } },
+	{ MODKEY|ShiftMask,             XK_c,      togglescratch,  {.v = calculatorscratchpadcmd } },
 
 	/* Stack */
 	STACKKEYS(MODKEY,                          focus)
