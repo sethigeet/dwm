@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=dwm
+Name=DWM
 Comment=Dynamic Window Manager
 Exec=dwm
 TryExec=dwm
