@@ -19,7 +19,7 @@ static const char *fonts[]          = { "monospace:size=10" };
 static char normbgcolor[]           = "#1F2335";
 static char normbordercolor[]       = "#545C7E";
 static char normfgcolor[]           = "#C0CAF5";
-static char selfgcolor[]            = "#C0CAF5";
+static char selfgcolor[]            = "#7AA2F7";
 static char selbordercolor[]        = "#7AA2F7";
 static char selbgcolor[]            = "#7AA2F7";
 static char *colors[][3] = {
@@ -47,6 +47,7 @@ static const Rule rules[] = {
 	{ "kitty",        NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
 	{ "St",           NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        1,           0,        -1,        0   },
 	{ NULL,           NULL,     "Event Tester",         0,             0,           0,      -1,  -1,  -1,  -1,        0,           1,        -1,        0   }, /* xev */
+	{ "Xephyr",       NULL,     NULL,                   0,             0,           0,      -1,  -1,  -1,  -1,        0,           1,        -1,        0   }, /* xephyr */
 
 	/* Scratchpads */
 	{ NULL,          NULL,      "terminal scratchpad",  0,             0,           1,      90, 11, 1728, 360,        1,           0,        -1,        't' }, /* terminal scratchpad */
