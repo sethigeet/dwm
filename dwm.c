@@ -3290,7 +3290,7 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 	{
 		switch (rtype) {
 		case STRING:
-			strcpy(&sdst, ret.addr);
+			strcpy(sdst, ret.addr);
 			break;
 		case INTEGER:
 			*idst = strtoul(ret.addr, NULL, 10);

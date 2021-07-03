@@ -113,7 +113,6 @@ ResourcePref resources[] = {
 	{ "altbarclass",        STRING,  &altbarclass },
 	{ "alttrayname",        STRING,  &alttrayname },
 	{ "altbarcmd",          STRING,  &altbarcmd },
-	{ "font",               STRING,  &fonts[0] },
 	{ "nmaster",            INTEGER, &nmaster },
 	{ "resizehints",       	INTEGER, &resizehints },
 	{ "mfact",            	FLOAT,   &mfact },
