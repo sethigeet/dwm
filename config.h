@@ -157,7 +157,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_f,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefloating, {0} },
 	{ MODKEY|ControlMask,           XK_s,      togglesticky,   {0} },
-	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
 
 	/* Move floating windows */
