@@ -29,7 +29,7 @@ static char *colors[][3] = {
  };
 
 /* tagging */
-static const char *tags[] = { "1: ", "2: ﬏", "3: ", "4: ", "5: 煉", "6: ", "7: ", "8: ", "9: " };
+static const char *tags[] = { "", "﬏", "", "", "煉", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* class      instance  title                    tags mask     iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
