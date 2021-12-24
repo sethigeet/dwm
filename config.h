@@ -51,7 +51,7 @@ static const Rule rules[] = {
 
 	/* Scratchpads */
 	{ NULL,          NULL,      "terminal scratchpad",  0,             0,           1,      90, 11, 1728, 360,        1,           0,        -1,        't' }, /* terminal scratchpad */
-	{ NULL,          NULL,      "Calculator",           0,             0,           1,     640, 360, 640, 360,        0,          -1,        -1,        'c' }, /* calculator scratchpad */
+	{ NULL,          NULL,      "Calculator",           0,             0,           1,     640, 360, 700, 360,        0,          -1,        -1,        'c' }, /* calculator scratchpad */
 };
 
 /* layout(s) */
