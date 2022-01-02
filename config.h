@@ -32,7 +32,7 @@ static char *colors[][3] = {
 static const char *tags[] = { "", "﬏", "", "", "煉", "", "", "", "" };
 
 static const Rule rules[] = {
-	/* class      instance  title                    tags mask     iscentered  isfloating      float x,y,w,h,     isterminal   noswallow  monitor  scratch key */
+	/* class      instance  title                    tags mask     iscentered  isfloating      float x,y,w,h      isterminal   noswallow  monitor  scratch key */
 
 	/* Make some windows floating */
 	{ "ssh-askpass",  NULL,     NULL,                   0,             0,           1,      -1,  -1,  -1,  -1,        0,           0,        -1,        0   }, /* ssh-askpass */
@@ -51,7 +51,7 @@ static const Rule rules[] = {
 
 	/* Scratchpads */
 	{ NULL,          NULL,      "terminal scratchpad",  0,             0,           1,      90, 11, 1728, 360,        1,           0,        -1,        't' }, /* terminal scratchpad */
-	{ NULL,          NULL,      "Calculator",           0,             0,           1,     640, 360, 700, 360,        0,          -1,        -1,        'c' }, /* calculator scratchpad */
+	{ NULL,          NULL,      "Calculator",           0,             1,           1,     620, 320, 680, 360,        0,          -1,        -1,        'c' }, /* calculator scratchpad */
 };
 
 /* layout(s) */
